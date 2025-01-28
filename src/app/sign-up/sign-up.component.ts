@@ -1,0 +1,43 @@
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { UsersService } from '../users.service';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss'],
+  imports: [FormsModule]
+})
+export class SignUpComponent {
+  username: string = '';
+  password: string = '';
+  email:string = '';
+
+  constructor(private router: Router, private usersService : UsersService) {}
+
+  // Funzione per chiudere il popup e tornare alla pagina principale
+  close() {
+    this.router.navigateByUrl('');  // Torna alla home page
+  }
+
+  // Cambia la modalità da Sign Up a Sign In
+  switchToSignIn() {
+    this.router.navigate(['/SignIn']);  // Naviga alla pagina SignIn
+  }
+
+  onSubmit() {
+    this.usersService.postRegisterUser(this.username, this.email, this.password)
+      .subscribe(
+        (response: any) => {
+          console.log('Registrazione avvenuta con successo:', response);
+          this.router.navigateByUrl('');  // Torna alla home page
+        },
+        (error: any) => {
+          console.error('Errore durante la registrazione:', error);
+        }
+      );
+  }
+
+
+}

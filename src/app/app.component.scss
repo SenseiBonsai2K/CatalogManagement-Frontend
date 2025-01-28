@@ -1,0 +1,305 @@
+/* Navbar */
+.navbar {
+    background-color: #1a1a1a; /* Nero scuro */
+    padding: 20px 0; /* Aumentiamo l'altezza dell'header */
+}
+
+/* Logo */
+.navbar-logo {
+    flex: 1;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #8a4dff; /* Viola */
+    transition: color 0.3s ease-in-out;
+}
+
+/* Hover su logo */
+.navbar-brand:hover {
+    color: #00b8f4; /* Azzurro chiaro */
+}
+
+/* Voci della navbar */
+.navbar-links {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+
+.navbar-nav {
+    display: flex;
+}
+
+.nav-item {
+    padding: 5px;
+}
+
+.nav-link {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Hover su tutti i link */
+.nav-link:hover {
+    color: #00b8f4; /* Azzurro chiaro */
+    transform: translateY(-5px);
+}
+
+/* Animazione per i link */
+.nav-link-animation {
+    position: relative;
+}
+
+.nav-link-animation::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: #8a4dff; /* Viola */
+    left: 0;
+    bottom: -4px;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.nav-link-animation:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Separazione dei bottoni */
+.navbar-buttons {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end; /* Allinea i bottoni a destra */
+}
+
+.navbar-nav .btn-signup, .navbar-nav .btn-signin {
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 8px 20px;
+    border-radius: 25px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    background-color: #8a4dff; /* Viola */
+    color: white;
+    border: 2px solid #8a4dff;
+    margin-left: 10px; /* Avviciniamo i bottoni riducendo il margin-left */
+}
+
+/* Rimuovi l'underline in tutte le situazioni (hover, focus, etc.) */
+.navbar-nav .btn-signup a, .navbar-nav .btn-signin a {
+    text-decoration: none; /* Rimuovi l'underline */
+}
+
+/* Hover su bottoni (assicurati che l'underline non compaia) */
+.navbar-nav .btn-signup:hover, .navbar-nav .btn-signin:hover {
+    background-color: #00b8f4; /* Azzurro chiaro */
+    color: #1a1a1a; /* Nero scuro */
+    border: 2px solid #00b8f4;
+    transform: translateY(-5px); /* Effetto di spostamento */
+    text-decoration: none; /* Assicurati che l'underline non compaia neanche durante l'hover */
+}
+
+/* Focus sui bottoni */
+.navbar-nav .btn-signup:focus, .navbar-nav .btn-signin:focus {
+    outline: none;
+    box-shadow: 0 0 5px #00b8f4;
+}
+
+/* Navbar toggler */
+.navbar-toggler-icon {
+    background-color: #00b8f4; /* Azzurro per il toggle */
+}
+
+/* Dropdown */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block; /* Mostra il menu a tendina quando si passa il mouse sopra */
+    opacity: 1; /* Assicura che il menu sia visibile */
+    transform: translateY(0); /* Anima il menu per farlo apparire */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Nascondi il menu a tendina di default */
+  .dropdown-menu {
+    display: none; /* Il menu è nascosto inizialmente */
+    position: absolute;
+    background-color: #1a1a1a; /* Nero scuro per il menu */
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3); /* Aggiungi un'ombra */
+    border-radius: 5px;
+    z-index: 9999;
+    margin-top: 5px;
+    min-width: 150px; /* Imposta una larghezza minima */
+    opacity: 0; /* Rende invisibile inizialmente */
+    transform: translateY(-10px); /* Partiamo da una posizione sopra */
+  }
+  
+  /* Imposta il colore del testo degli item del dropdown come bianco */
+  .dropdown-item {
+    color: white; /* Testo bianco */
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Aggiungi transizione per hover */
+  }
+  
+  /* Hover sugli item del menu a tendina */
+  .dropdown-item:hover {
+    background-color: #8a4dff; /* Colore di background viola (come il Sign Up) */
+    color: white; /* Colore del testo bianco durante hover */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Aggiungi transizione per il colore */
+  }
+
+
+/* Barra di ricerca */
+.navbar-search {
+    position: relative;
+    margin-left: 20px; /* Aggiungi un po' di margine a sinistra */
+  }
+  
+  .navbar-search .form-control {
+    border-radius: 25px;
+    padding: 10px 20px;
+    background-color: white; /* Impostiamo lo sfondo bianco */
+    color: #1a1a1a; /* Colore del testo scuro per il contrasto */
+    border: 2px solid #8a4dff; /* Bordo viola */
+    font-size: 1rem;
+    width: 200px; /* Larghezza fissa, ma può essere adattata */
+    transition: all 0.3s ease;
+  }
+  
+  .navbar-search .form-control:focus {
+    background-color: white; /* Mantieni il bianco durante il focus */
+    border-color: #00b8f4; /* Colore azzurro per il focus */
+    outline: none; /* Rimuovi il contorno di default */
+  }
+  
+  .navbar-search .btn-search {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%); /* Allinea verticalmente l'icona di ricerca */
+    background-color: transparent;
+    border: none;
+    color: #8a4dff; /* Colore dell'icona viola */
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-search .btn-search:hover {
+    color: #00b8f4; /* Colore dell'icona azzurro durante l'hover */
+  }
+  
+  
+
+  
+
+
+
+//* Footer */
+.footer {
+    background-color: #1a1a1a; /* Nero scuro */
+    color: white;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    position: relative; /* Necessario per il layout sticky */
+    bottom: 0;
+    width: 100%; /* Fa sì che il footer occupi tutta la larghezza */
+}
+
+/* Contenitore principale */
+.footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Contenuto del footer */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Social media */
+.social-media {
+    display: flex;
+    justify-content: flex-start; /* Allinea le icone social a sinistra */
+    margin-right: 30px;
+}
+
+.social-icon {
+    color: #8a4dff; /* Viola */
+    font-size: 1.5rem;
+    margin: 0 15px;
+    transition: color 0.3s ease-in-out;
+}
+
+.social-icon:hover {
+    color: #00b8f4; /* Azzurro chiaro */
+}
+
+/* Sezione copyright */
+.footer-copyright {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Centra il contenuto */
+    text-align: center; /* Centra il testo */
+    margin: 0;
+}
+
+.footer-copyright p {
+    margin: 0;
+    color: #888; /* Grigio chiaro per il testo copyright */
+}
+
+/* Sezione links (privacy e termini) */
+.footer-links {
+    display: flex;
+    justify-content: flex-start; /* Allinea i link a sinistra */
+}
+
+.footer-links a {
+    color: #8a4dff; /* Viola */
+    text-decoration: none;
+    margin: 0 15px;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-links a:hover {
+    color: #00b8f4; /* Azzurro chiaro */
+}
+
+/* Media Queries per dispositivi mobili */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .social-media {
+        margin-bottom: 15px;
+    }
+
+    .footer-links {
+        margin-top: 10px;
+    }
+
+    .footer-copyright {
+        margin-bottom: 15px; /* Spazio sotto il copyright su dispositivi mobili */
+    }
+
+    .footer-links a {
+        margin-bottom: 5px; /* Un po' di spazio tra i link su mobile */
+    }
+}

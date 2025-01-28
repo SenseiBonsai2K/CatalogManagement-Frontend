@@ -1,0 +1,31 @@
+<!-- Pagina di dettaglio -->
+<div class="container mt-5">
+<!-- Pagina Dettaglio con Freccia Go Back -->
+  <div class="go-back-container">
+    <a href="javascript:history.back()" class="go-back-link">
+      <i class="fas fa-arrow-left"></i> Go Back
+    </a>
+  </div>
+<!-- Pagina Dettaglio con Dettagli dell'Apparel -->
+  <div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="detailed-image-container">
+                <img [src]="apparel.imageUrl" class="img-fluid" alt="{{apparel.name}}">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h1 class="display-4">{{apparel.name}}</h1>
+            <p class="lead">{{apparel.category.name}}</p>
+            <p class="lead">{{apparel.description}}</p>
+            <h3 class="text-muted">Price: ${{apparel.price}}</h3>
+            <p><strong>Size:</strong> {{apparel.size}}</p>
+            <p><strong>Material:</strong> {{apparel.material}}</p>
+            <p><strong>Brand:</strong> {{apparel.brand}}</p>
+            <p><strong>Stock:</strong> {{apparel.stock}}</p>
+        </div>
+    </div>
+</div>
+
+</div>
+
