@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsersService } from '../users.service';
+import { UserService } from '../services/users.service';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,7 +14,7 @@ export class SignInComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private router: Router, private usersService : UsersService) {}
+  constructor(private router: Router, private usersService : UserService) {}
 
   // Chiudi il popup
   close() {
@@ -28,12 +29,15 @@ export class SignInComponent {
   onSubmit() {
     this.usersService.postLoginUser(this.email, this.password)
       .subscribe(
-        (response: any) => {
-          console.log('Autenticazione avvenuta con successo:', response);
-          this.router.navigateByUrl('');  // Torna alla home page
+        response  => {
+          console.log('Login successful', response);
+          this.router.navigateByUrl('').then(() => {
+            window.location.reload();
+          });
         },
-        (error: any) => {
-          console.error('Errore durante autenticazione:', error);
+        error => {
+          console.error(error);
+          alert("Invalid Credentials");
         }
       );
   }

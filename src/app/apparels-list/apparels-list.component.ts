@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ApparelComponent } from '../apparel/apparel.component';
 import { Apparel } from '../apparel';
-import { ApparelsService } from '../apparels.service';
+import { ApparelsService } from '../services/apparels.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

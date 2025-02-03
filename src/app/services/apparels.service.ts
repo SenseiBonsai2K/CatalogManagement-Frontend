@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Apparel } from './apparel';
-import { environment } from '../environments/environment.development';
+import { Apparel } from '../apparel';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'

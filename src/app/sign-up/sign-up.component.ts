@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsersService } from '../users.service';
+import { UserService } from '../services/users.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -14,7 +14,7 @@ export class SignUpComponent {
   password: string = '';
   email:string = '';
 
-  constructor(private router: Router, private usersService : UsersService) {}
+  constructor(private router: Router, private usersService : UserService) {}
 
   // Funzione per chiudere il popup e tornare alla pagina principale
   close() {
@@ -31,13 +31,13 @@ export class SignUpComponent {
       .subscribe(
         (response: any) => {
           console.log('Registrazione avvenuta con successo:', response);
-          this.router.navigateByUrl('');  // Torna alla home page
+          this.router.navigateByUrl('/SignIn');  // Torna alla home page
         },
         (error: any) => {
           console.error('Errore durante la registrazione:', error);
+          const errorMessage = error.error || 'Errore durante la registrazione';
+          alert(errorMessage);
         }
       );
   }
-
-
 }

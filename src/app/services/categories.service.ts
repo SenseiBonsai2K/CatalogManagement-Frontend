@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../environments/environment.development';
+import { environment } from '../../environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Category } from './category';
+import { Category } from '../category';
 import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
@@ -13,8 +13,7 @@ export class CategoriesService {
   constructor(private httpClient : HttpClient) { }
 
   getCategories(): Observable<Category[]> {
-      const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-      return this.httpClient.get<Category[]>(this.GetCategoriesUrl, { headers })
+      return this.httpClient.get<Category[]>(this.GetCategoriesUrl)
         .pipe(
           catchError(this.handleError)
         );

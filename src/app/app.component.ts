@@ -2,7 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, AfterViewInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Category } from './category';
-import { CategoriesService } from './categories.service';
+import { CategoriesService } from './services/categories.service';
+import { UserService } from './services/users.service';
+import { Token } from '@angular/compiler';
+import { TokenService } from './services/token.service';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +18,15 @@ export class AppComponent implements AfterViewInit {
   title = 'Catalog';
   categories: Category[] = [];
   isPopupVisible = false;
+  user : any = null;
+  isAuthenticated = false;
 
-  constructor(private CategoriesService: CategoriesService, private router: Router) {}
+  constructor(private CategoriesService: CategoriesService, private router: Router, private usersService : UserService, private tokenService: TokenService) {}
+
+  ngOnInit(): void {
+      this.loadCategories();
+      this.checkAuthentication();
+    }
 
   ngAfterViewInit(): void {
     const bar = Array.from(document.querySelectorAll("li"));
@@ -31,25 +41,11 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  ngOnInit(): void {
-      this.CategoriesService.getCategories().subscribe(
-        (data: Category[]) => {
-          console.log(data);
-          this.categories = data;
-        },
-        error => console.error('There was an error!', error)
-      );
-    }
-
   // Metodo per la ricerca tramite il tasto Invio
   onSearchKeyDown(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
       const query = (<HTMLInputElement>event.target).value;
-      if (query.trim()) {
-        this.search(query);
-      } else {
-        console.log('La query di ricerca è vuota!');
-      }
+      this.search(query);
     }
   }
 
@@ -58,7 +54,7 @@ export class AppComponent implements AfterViewInit {
     if (query.trim()) { // Controlla se la query non è vuota o solo spazi
       this.router.navigate(['/Apparels/Search', query]);
     } else {
-      console.log('La query di ricerca è vuota!');
+      this.router.navigate(['/Apparels']);
     }
   }
 
@@ -70,5 +66,34 @@ export class AppComponent implements AfterViewInit {
   // Funzione per chiudere il popup
   closePopup() {
     this.isPopupVisible = false;
+  }
+
+  checkAuthentication(): void {
+    this.isAuthenticated = this.usersService.isLoggedIn();
+    if (this.isAuthenticated) {
+      const token = this.tokenService.getToken();
+      if (token) {
+        this.user = this.tokenService.decodeToken(token);
+        console.log('User:', this.user);
+      }
+    }
+  }
+
+  logout(): void {
+    this.usersService.logout();
+    this.user = null;
+    this.isAuthenticated = false;
+    this.router.navigateByUrl('').then(() => {
+      window.location.reload();
+    });
+  }
+
+  loadCategories(): void {
+    this.CategoriesService.getCategories().subscribe(
+      (data: Category[]) => {
+        this.categories = data;
+      },
+      error => console.error('There was an error!', error)
+    );
   }
 }
