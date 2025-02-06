@@ -28,17 +28,16 @@ export class SignInComponent {
 
   onSubmit() {
     this.usersService.postLoginUser(this.email, this.password)
-      .subscribe(
-        response  => {
-          console.log('Login successful', response);
-          this.router.navigateByUrl('').then(() => {
-            window.location.reload();
-          });
+      .subscribe({
+        next: response => {
+          localStorage.setItem('token', response.token);
+          console.log('Login successful:', localStorage.getItem('token'));
+          this.router.navigateByUrl('');
         },
-        error => {
-          console.error(error);
-          alert("Invalid Credentials");
-        }
-      );
+        error: error => {
+          console.error('Error logging in:', error);
+          alert('Error logging in: ' + (error.error?.message || 'Unknown error'));
+      }
+      });
   }
 }

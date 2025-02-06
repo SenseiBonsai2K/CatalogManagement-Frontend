@@ -19,20 +19,11 @@ PutUpdateUserUrl = `${environment.baseURL}/api/User/UpdateUser`;
   }
 
   postLoginUser(email: string, password: string): Observable<any> {
-    return this.httpClient.post<any>(this.PostLoginUrl, { email, password }).pipe(
-      tap(response => {
-        if (response.token) {
-          localStorage.setItem('token', response.token);
-        }
-      }),
-      catchError(error => {
-        return throwError(error);
-      })
-    );
+    return this.httpClient.post(this.PostLoginUrl, { email, password });
   }
 
-  PutUpdateUser(username: string, email: string, password: string) {
-    return this.httpClient.put(this.PutUpdateUserUrl, { username, email, password });
+  PutUpdateUser(id: number, username: string, email: string, password: string) {
+    return this.httpClient.put(this.PutUpdateUserUrl, { id, username, email, password });
   }
 
   isLoggedIn() : boolean {

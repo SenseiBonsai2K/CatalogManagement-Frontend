@@ -4,15 +4,16 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor() {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    debugger;
     const localToken = localStorage.getItem('token');
+    console.log(localToken+"Interceptor");  
+    
     if (localToken) {
-      req = req.clone({
-        headers: req.headers.set('Authorization', `Bearer ${localToken}`)
+      const clonedReq = req.clone({
+        setHeaders:{Authorization: `Bearer ${localToken}`}
       });
+      return next.handle(clonedReq);
     }
     return next.handle(req);
   }

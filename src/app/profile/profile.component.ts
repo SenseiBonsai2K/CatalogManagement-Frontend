@@ -15,8 +15,9 @@ export class ProfileComponent {
   user: any = null;
   username: string = '';
   email: string = '';
-  password: string = '';  // Nuova variabile per la password
-  isEditable: boolean = false;  // Variabile per gestire la modalità di modifica
+  password: string = '';
+  id: number = 0;
+  isEditable: boolean = false;
 
   constructor(private router: Router, private userService: UserService, private tokenService: TokenService) { }
 
@@ -32,6 +33,7 @@ export class ProfileComponent {
       this.user = decodedPayload;
       this.username = this.user.Username;
       this.email = this.user.Email;
+      this.id = this.user.Id;
       console.log('User profile loaded:', this.user);
     } else {
       console.error('No token found');
@@ -39,11 +41,7 @@ export class ProfileComponent {
   }
 
   onSubmit() {
-    debugger;
-    // Implementa la logica per salvare le modifiche al profilo dell'utente
-    console.log('Saving changes:', this.username, this.email, this.password);
-    // Chiama il metodo del servizio UsersService per aggiornare il profilo dell'utente
-    this.userService.PutUpdateUser(this.username, this.email, this.password).subscribe(
+    this.userService.PutUpdateUser(this.id, this.username, this.email, this.password).subscribe(
       response => {
         console.log('Profile updated successfully:', response);
         alert('Profile updated successfully');
@@ -56,10 +54,9 @@ export class ProfileComponent {
   }
 
   close() {
-    this.router.navigateByUrl('');  // Torna alla home page
+    this.router.navigateByUrl('');
   }
 
-  // Funzione per abilitare/disabilitare la modifica dei campi
   toggleEdit() {
     this.isEditable = !this.isEditable;
     if (!this.isEditable) {
