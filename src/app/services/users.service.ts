@@ -34,7 +34,8 @@ PutUpdateUserUrl = `${environment.baseURL}/api/User/UpdateUser`;
   }
   
   isAuthenticated(): boolean {
-    return !!this.tokenService.getToken();
+    const token = this.tokenService.getToken();
+    return !!token && !this.tokenService.isTokenExpired();
   }
 
   logout() {

@@ -35,9 +35,8 @@ export class ProfileComponent implements OnInit {
 
   loadProfile(): void {
     const token = this.tokenService.getToken();
-    if (token && !this.tokenService.isTokenExpired()) {
-      const payload = token.split('.')[1];
-      const decodedPayload = JSON.parse(atob(payload));
+    if (token) {
+      const decodedPayload = this.tokenService.decodeToken(token);
       this.user = decodedPayload;
 
       this.username = this.user.Username;
@@ -45,10 +44,6 @@ export class ProfileComponent implements OnInit {
       this.id = this.user.Id;
 
       console.log('User profile loaded:', this.user);
-
-    } else {
-      console.error('No token found or token is expired');
-      this.router.navigate(['/SignIn']);
     }
   }
 
