@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../services/users.service';
 import { TokenService } from '../services/token.service';
 import { addUserRequest } from '../user';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,7 @@ import { addUserRequest } from '../user';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   actualUser: addUserRequest = { username: '', email: '', password: '' };
   user: any = null;
   username: string = '';
@@ -21,7 +22,12 @@ export class ProfileComponent {
   id: number = 0;
   isEditable: boolean = false;
 
-  constructor(private router: Router, private userService: UserService, private tokenService: TokenService) { }
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private tokenService: TokenService,
+    private appComponent: AppComponent
+  ) {}
 
   ngOnInit(): void {
     this.loadProfile();
@@ -32,26 +38,32 @@ export class ProfileComponent {
     if (token && !this.tokenService.isTokenExpired()) {
       const payload = token.split('.')[1];
       const decodedPayload = JSON.parse(atob(payload));
-
       this.user = decodedPayload;
+
       this.username = this.user.Username;
       this.email = this.user.Email;
       this.id = this.user.Id;
-      
+
       console.log('User profile loaded:', this.user);
+
     } else {
-      console.error('No token found');
+      console.error('No token found or token is expired');
+      this.router.navigate(['/SignIn']);
     }
   }
 
-  onSubmit() {
-    this.actualUser.email=this.email;
-    this.actualUser.password=this.password;
-    this.actualUser.username=this.username;
+  onSubmit(): void {
+    this.actualUser.username = this.username;
+    this.actualUser.email = this.email;
+    this.actualUser.password = this.password;
+
     this.userService.PutUpdateUser(this.id, this.actualUser).subscribe(
       response => {
         console.log('Profile updated successfully:', response);
         alert('Profile updated successfully');
+        this.resetProfile();
+        this.appComponent.logout();
+        this.router.navigateByUrl('/SignIn');
       },
       error => {
         console.error('Error updating profile:', error);
@@ -60,11 +72,19 @@ export class ProfileComponent {
     );
   }
 
-  close() {
+  resetProfile(): void {
+    this.user = null;
+    this.username = '';
+    this.email = '';
+    this.password = '';
+    this.id = 0;
+  }
+
+  close(): void {
     this.router.navigateByUrl('');
   }
 
-  toggleEdit() {
+  toggleEdit(): void {
     this.isEditable = !this.isEditable;
     if (!this.isEditable) {
       this.onSubmit();

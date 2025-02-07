@@ -19,19 +19,15 @@ export class ApparelsListComponent {
   constructor(private ApparelsService: ApparelsService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // Verifica quale parametro è stato passato
     this.route.paramMap.subscribe(params => {
-      this.categoryName = params.get('name'); // per la rotta delle categorie
-      this.searchQuery = params.get('searched'); // per la rotta di ricerca
+      this.categoryName = params.get('name');
+      this.searchQuery = params.get('searched');
 
       if (this.categoryName) {
-        // Se abbiamo una categoria, carichiamo gli apparels per quella categoria
         this.loadApparelsByCategory(this.categoryName);
       } else if (this.searchQuery) {
-        // Se abbiamo una query di ricerca, carichiamo gli apparels in base alla query
         this.loadApparelsByName(this.searchQuery);
       } else {
-        // Se non c'è né categoria né ricerca, carichiamo tutti gli apparels
         this.loadApparels();
       }
     });

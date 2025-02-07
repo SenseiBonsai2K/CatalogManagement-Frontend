@@ -10,6 +10,6 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(
       withInterceptors([JwtInterceptor])
     ),
-    provideRouter(routes), // Fornisce i servizi HttpClient
+    provideRouter(routes),
   ],
 });

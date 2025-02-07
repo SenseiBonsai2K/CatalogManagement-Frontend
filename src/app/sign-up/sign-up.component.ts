@@ -16,14 +16,12 @@ export class SignUpComponent {
 
   constructor(private router: Router, private usersService : UserService) {}
 
-  // Funzione per chiudere il popup e tornare alla pagina principale
   close() {
-    this.router.navigateByUrl('');  // Torna alla home page
+    this.router.navigateByUrl('');
   }
 
-  // Cambia la modalità da Sign Up a Sign In
   switchToSignIn() {
-    this.router.navigate(['/SignIn']);  // Naviga alla pagina SignIn
+    this.router.navigate(['/SignIn']);
   }
 
   onSubmit() {
@@ -31,7 +29,7 @@ export class SignUpComponent {
       .subscribe(
         (response: any) => {
           console.log('Registrazione avvenuta con successo:', response);
-          this.router.navigateByUrl('/SignIn');  // Torna alla home page
+          this.router.navigateByUrl('/SignIn');
         },
         (error: any) => {
           console.error('Errore durante la registrazione:', error);

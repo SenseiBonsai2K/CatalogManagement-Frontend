@@ -32,6 +32,6 @@ export class TokenService {
       const now = Math.floor(Date.now() / 1000);
       return exp < now;
     }
-    return true; // Consider the token expired if it's not present or invalid
+    return true;
   }
 }

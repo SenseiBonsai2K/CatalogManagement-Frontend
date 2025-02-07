@@ -1,32 +1,31 @@
 <div class="modal-overlay" (click)="close()">
-    <div class="modal-content" (click)="$event.stopPropagation()">
-      <span class="close-btn" (click)="close()">&times;</span>
-      <h2>Profile</h2>
-      <div class="profile-info">
-        
-        <!-- Campo Username -->
-        <div class="input-group">
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" [(ngModel)]="username" [disabled]="!isEditable">
-        </div>
-  
-        <!-- Campo Email -->
-        <div class="input-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" [(ngModel)]="email" [disabled]="!isEditable">
-        </div>
-  
-        <!-- Campo Password (visibile solo quando si modifica) -->
-        <div class="input-group" *ngIf="isEditable">
-          <label for="password">New Password</label>
-          <input type="password" id="password" name="password" [(ngModel)]="password">
-        </div>
-  
-        <!-- Bottone per abilitare la modifica -->
-        <button class="submit-btn" (click)="toggleEdit()">
-          {{ isEditable ? 'Save Changes' : 'Edit Profile' }}
-        </button>
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close-btn" (click)="close()">&times;</span>
+    <h2>Profile</h2>
+    <div class="profile-info">
+      
+      <!-- Campo Username -->
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" [(ngModel)]="username" [disabled]="!isEditable">
       </div>
+
+      <!-- Campo Email -->
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" [(ngModel)]="email" [disabled]="!isEditable">
+      </div>
+
+      <!-- Campo Password (visibile solo quando si modifica) -->
+      <div class="input-group" *ngIf="isEditable">
+        <label for="password">New Password</label>
+        <input type="password" id="password" name="password" [(ngModel)]="password">
+      </div>
+
+      <!-- Bottone per abilitare la modifica -->
+      <button class="submit-btn" (click)="toggleEdit()">
+        {{ isEditable ? 'Save Changes' : 'Edit Profile' }}
+      </button>
     </div>
   </div>
-  
+</div>

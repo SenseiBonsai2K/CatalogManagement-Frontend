@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../services/users.service';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,14 +15,12 @@ export class SignInComponent {
 
   constructor(private router: Router, private usersService : UserService) {}
 
-  // Chiudi il popup
   close() {
-    this.router.navigateByUrl('');  // Torna alla home page
+    this.router.navigateByUrl('');
   }
 
-  // Cambia la modalità da Sign In a Sign Up
   switchToSignUp() {
-    this.router.navigate(['/SignUp']);  // Naviga alla pagina SignUp
+    this.router.navigate(['/SignUp']);
   }
 
   onSubmit() {
@@ -32,7 +29,9 @@ export class SignInComponent {
         next: response => {
           localStorage.setItem('token', response.token);
           console.log('Login successful:', localStorage.getItem('token'));
-          this.router.navigateByUrl('');
+          this.router.navigateByUrl('').then(() => {
+            window.location.reload();
+          });
         },
         error: error => {
           console.error('Error logging in:', error);

@@ -4,7 +4,6 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Category } from './category';
 import { CategoriesService } from './services/categories.service';
 import { UserService } from './services/users.service';
-import { Token } from '@angular/compiler';
 import { TokenService } from './services/token.service';
 
 @Component({
@@ -41,7 +40,6 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  // Metodo per la ricerca tramite il tasto Invio
   onSearchKeyDown(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
       const query = (<HTMLInputElement>event.target).value;
@@ -49,21 +47,18 @@ export class AppComponent implements AfterViewInit {
     }
   }
 
-  // Metodo per la ricerca tramite il bottone
   search(query: string): void {
-    if (query.trim()) { // Controlla se la query non è vuota o solo spazi
+    if (query.trim()) {
       this.router.navigate(['/Apparels/Search', query]);
     } else {
       this.router.navigate(['/Apparels']);
     }
   }
 
-  // Funzione per aprire il popup
   openPopup() {
     this.isPopupVisible = true;
   }
 
-  // Funzione per chiudere il popup
   closePopup() {
     this.isPopupVisible = false;
   }
