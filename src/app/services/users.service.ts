@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { TokenService } from './token.service';
+import { addUserRequest } from '../user';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ PutUpdateUserUrl = `${environment.baseURL}/api/User/UpdateUser`;
     return this.httpClient.post(this.PostLoginUrl, { email, password });
   }
 
-  PutUpdateUser(id: number, username: string, email: string, password: string) {
-    return this.httpClient.put(this.PutUpdateUserUrl, { id, username, email, password });
+  PutUpdateUser(id: number, addUserRequest: addUserRequest) {
+    return this.httpClient.put(this.PutUpdateUserUrl, { id, addUserRequest });
   }
 
   isLoggedIn() : boolean {

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../services/users.service';
 import { TokenService } from '../services/token.service';
+import { addUserRequest } from '../user';
 
 @Component({
   selector: 'app-profile',
@@ -12,6 +13,7 @@ import { TokenService } from '../services/token.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent {
+  actualUser: addUserRequest = { username: '', email: '', password: '' };
   user: any = null;
   username: string = '';
   email: string = '';
@@ -30,10 +32,12 @@ export class ProfileComponent {
     if (token && !this.tokenService.isTokenExpired()) {
       const payload = token.split('.')[1];
       const decodedPayload = JSON.parse(atob(payload));
+
       this.user = decodedPayload;
       this.username = this.user.Username;
       this.email = this.user.Email;
       this.id = this.user.Id;
+      
       console.log('User profile loaded:', this.user);
     } else {
       console.error('No token found');
@@ -41,7 +45,10 @@ export class ProfileComponent {
   }
 
   onSubmit() {
-    this.userService.PutUpdateUser(this.id, this.username, this.email, this.password).subscribe(
+    this.actualUser.email=this.email;
+    this.actualUser.password=this.password;
+    this.actualUser.username=this.username;
+    this.userService.PutUpdateUser(this.id, this.actualUser).subscribe(
       response => {
         console.log('Profile updated successfully:', response);
         alert('Profile updated successfully');
