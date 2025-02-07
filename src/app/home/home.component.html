@@ -1,96 +1,11 @@
-<div class="container">
-  <h1 class="mt-5">CatalogManagement</h1>
-  
-  <h2>Scopo del progetto</h2>
-  <p>CatalogManagement è una Single Page Application (SPA) creata per un progetto universitario per l'esame di Applicazioni Web e Mobile. Il progetto è stato sviluppato con il backend in .NET e il frontend in Angular. Lo scopo di questo progetto è quello di permettere la visualizzazione online del catalogo di un negozio. Gli utenti possono navigare nel catalogo senza essere autenticati, ma hanno anche la possibilità di registrarsi, accedere e modificare le proprie credenziali di accesso.</p>
-  <br>
-  <h2>Tecnologie Utilizzate</h2>
-  <br>
-  <h3>Lato Backend</h3>
-  <ul>
-    <li><strong>.NET Framework:</strong> Utilizzato per sviluppare l'intera applicazione backend.</li>
-    <li><strong>Swagger UI:</strong> Utilizzato per testare gli endpoint dell'API.</li>
-    <li><strong>JWT Authentication:</strong> Utilizzato per proteggere gli endpoint e gestire l'autenticazione degli utenti.</li>
-    <li><strong>SSMS (SQL Server Management Studio):</strong> Utilizzato per la gestione persistente dei dati.</li>
-    <li><strong>Entity Framework Core:</strong> Utilizzato per l'accesso ai dati e la gestione del database.</li>
-    <li><strong>Microsoft.Extensions.Configuration:</strong> Utilizzato per la gestione della configurazione dell'applicazione.</li>
-  </ul>
-  
-  <h3>Lato Frontend</h3>
-  <ul>
-    <li><strong>Angular:</strong> Framework di sviluppo web front-end basato su TypeScript, utilizzato per creare applicazioni web dinamiche e single-page applications (SPA).</li>
-    <li><strong>TypeScript:</strong> Superset di JavaScript che aggiunge tipizzazione statica e altre funzionalità avanzate.</li>
-    <li><strong>HTML:</strong> Utilizzato per definire la struttura del contenuto delle pagine.</li>
-    <li><strong>CSS/SCSS:</strong> Linguaggi di stile utilizzati per descrivere la presentazione di un documento scritto in HTML.</li>
-    <li><strong>Angular HTTP Client:</strong> Modulo di Angular che fornisce un'API per effettuare richieste HTTP verso server remoti.</li>
-    <li><strong>JWT (JSON Web Token):</strong> Utilizzato per l'autenticazione e l'autorizzazione. I token JWT vengono utilizzati per verificare l'identità degli utenti.</li>
-  </ul>
-  <br>
-  <h2>Struttura del Backend</h2>
-  <br>
-  <h3>1. Application Layer</h3>
-  <p>Questo livello contiene tutti i servizi, i DTOs (Data Transfer Objects), le richieste e le risposte del progetto. È responsabile dell'implementazione della logica di business e dell'orchestrazione delle operazioni.</p>
-  <ul>
-    <li><strong>Servizi:</strong> Gestiscono le operazioni di business, come UserService per la gestione degli utenti.</li>
-    <li><strong>DTOs:</strong> Oggetti utilizzati per trasferire dati tra il client e il server, come UserDTO.</li>
-    <li><strong>Requests e Responses:</strong> Definiscono le strutture delle richieste e delle risposte per gli endpoint API.</li>
-  </ul>
+<!-- Contenitore centrale per allineare tutto al centro, con spaziamento in alto -->
+<div class="center-container">
+  <!-- Catalog Manager come logo -->
+  <div class="catalog-manager">Catalog Manager</div>
 
-  <h3>2. Web Layer</h3>
-  <p>Questo livello contiene i controller API, il file Program.cs e il file di configurazione appsettings.json. È responsabile della gestione delle richieste HTTP e dell'inizializzazione dell'applicazione.</p>
-  <ul>
-    <li><strong>Controllers:</strong> Espongono gli endpoint API per l'interazione con il frontend, come UserController.</li>
-    <li><strong>Program.cs:</strong> Punto di ingresso dell'applicazione, dove viene configurato il web host.</li>
-    <li><strong>appsettings.json:</strong> File di configurazione che contiene impostazioni come stringhe di connessione al database e chiavi di configurazione.</li>
-  </ul>
-
-  <h3>3. Module Layer</h3>
-  <p>Questo livello contiene tutte le configurazioni, i repository, il contesto del database e le entità. Definisce le strutture dati e le regole di business fondamentali.</p>
-  <ul>
-    <li><strong>Configurazioni:</strong> Configurazioni per Entity Framework e altre impostazioni.</li>
-    <li><strong>Repositories:</strong> Classi che gestiscono l'accesso ai dati, come UserRepository.</li>
-    <li><strong>DB Context:</strong> Classe che rappresenta il contesto del database, come MyDbContext.</li>
-    <li><strong>Entità:</strong> Modelli di dati che rappresentano le tabelle del database, come User, Apparel, Category.</li>
-  </ul>
-  <br>
-  <h2>Struttura del Frontend</h2>
-  <p>Il frontend è composto da una pagina principale che cambia il proprio contenuto in modo dinamico in base alla route. Ogni route richiama un componente diverso, permettendo una navigazione fluida e una gestione modulare delle diverse sezioni dell'applicazione.</p>
-  <p><strong>Componenti:</strong> Ogni componente è composto da tre file principali:</p>
-  <ul>
-    <li><strong>TypeScript (.ts):</strong> Contiene la logica del componente, inclusi i metodi, le proprietà e le interazioni con i servizi.</li>
-    <li><strong>HTML (.html):</strong> Definisce la struttura del componente, utilizzando il markup HTML per organizzare il contenuto.</li>
-    <li><strong>CSS/SCSS (.css o .scss):</strong> Contiene lo stile del componente, definendo l'aspetto visivo e la presentazione del contenuto.</li>
-  </ul>
-  
-  <p><strong>Servizi:</strong> I servizi sono raggruppati nella cartella services e fungono da nodo di comunicazione con il backend. Gestiscono le operazioni di business e le comunicazioni HTTP.</p>
-  
-  <p><strong>Interceptor:</strong> Gli interceptor vengono utilizzati per intercettare le richieste HTTP prima che vengano inviate al server, aggiungendo nell'header il JWT.</p>
-  
-  <p><strong>Environment:</strong> Il file di configurazione environment viene utilizzato per salvare globalmente l'URL dell'API.</p>
-  <br>
-  <h2>Funzionamento</h2>
-  <p>Le entità principali sono Apparel, Category e User. Ogni Apparel deve avere una sola Category. La struttura delle entità è la seguente:</p>
-  <ul>
-    <li><strong>User:</strong> composto da id, username, email, password e role.</li>
-    <li><strong>Category:</strong> composto da id e name.</li>
-    <li><strong>Apparel:</strong> composto da id, categoryId e molti altri elementi che servono per rappresentarlo (nome, descrizione, prezzo, materiale, ecc.).</li>
-  </ul>
-  
-  <p>Per ogni entità nel sistema esistono diversi componenti, ciascuno con uno scopo ben preciso:</p>
-  <ul>
-    <li><strong>Configurazione:</strong> Ogni entità ha una configurazione che rappresenta la sua tabella nel database. Questa configurazione definisce la struttura dei dati e le relazioni con altre entità.</li>
-    <li><strong>Repository:</strong> Ogni entità ha una repository che estende una repository generale. La repository generale implementa operazioni di base come il salvataggio, l'aggiornamento e la cancellazione dei dati, mentre la repository dell'entità gestisce operazioni più avanzate e personalizzate.</li>
-    <li><strong>DTO (Data Transfer Object):</strong> Ogni entità ha un DTO che serve a preimpostare e strutturare le informazioni in un formato visualizzabile nel frontend.</li>
-    <li><strong>Servizio:</strong> Ogni entità ha un servizio che interagisce con la repository per eseguire operazioni sul database e arricchisce le operazioni con logica di business.</li>
-    <li><strong>Controller:</strong> Ogni entità ha un controller che gestisce le API, eseguendo chiamate ai servizi per recuperare o modificare i dati.</li>
-    <li><strong>Request Model:</strong> Ogni API utilizza un Request Model che rappresenta la struttura dei dati inviati dal frontend al backend. Il Request Model è usato per validare e strutturare correttamente le informazioni ricevute prima che vengano elaborate dal servizio.</li>
-  </ul>
-  <br>
-  <h2>Servizi che Interagiscono con le API</h2>
-  <ul>
-    <li><strong>usersService:</strong> utilizza le API AddUser, Login, UpdateUser.</li>
-    <li><strong>categoriesService:</strong> utilizza l'API GetCategories.</li>
-    <li><strong>apparelsService:</strong> utilizza le API GetApparels, GetApparelById, GetApparelsByCategoryName, GetApparelsByName.</li>
-    <li><strong>tokenService:</strong> compie tutte le operazioni necessarie sul token che viene inviato dal backend al frontend in fase di login, lo decodifica, ne controlla la scadenza e ne fornisce i metodi per essere richiamato.</li>
-  </ul>
+  <!-- Bottoni Backend e Frontend -->
+  <div class="buttons-container">
+      <button class="btn btn-backend">Backend</button>
+      <button class="btn btn-frontend">Frontend</button>
+  </div>
 </div>

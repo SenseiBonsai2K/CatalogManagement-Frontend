@@ -1,166 +1,60 @@
-// Definizione dei colori
-$primary-color: #00b8f4;
-$secondary-color: #8a4dff; 
-$accent-color: #ff00ea; 
-$background-color: #f5f5f5;
-$text-color: #333333;
-$shadow-color: rgba(0, 0, 0, 0.1);
-
-// Corpo principale
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: $background-color;
-  color: $text-color;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
-  transition: background-color 0.3s ease-in-out;
+// Centrare il contenuto al centro della pagina e alzarlo
+.center-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;  // Alza il contenuto verso l'alto
+    align-items: center;          // Centra orizzontalmente
+    min-height: 100vh;            // Assicura che la pagina occupi almeno tutta l'altezza della finestra
+    text-align: center;           // Centra il testo all'interno
+    background-color: #f8f9fa;    // Sfondo chiaro
+    padding-top: 250px;            // Alza ulteriormente il contenuto aggiungendo un padding in alto
 }
 
-// Container principale
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+// Stile per "Catalog Manager" (simile al logo) con scritta più grande e illuminazione viola
+.catalog-manager {
+    font-size: 3rem;  // Aumento la dimensione della scritta
+    font-weight: bold;
+    color: #8a4dff;   /* Colore bianco */
+    transition: color 0.3s ease-in-out, transform 0.3s ease;
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #8a4dff, 0 0 30px #8a4dff, 0 0 40px #8a4dff; /* Illuminazione viola */
+    margin-bottom: 30px;
 }
 
-// Header
-h1 {
-  color: $primary-color;
-  text-align: center;
-  font-size: 3rem;
-  margin-bottom: 2rem;
-  animation: fadeIn 1s ease-in-out;
-
-  // Aggiunta di ombra per il testo
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+.catalog-manager:hover {
+    color: #ffffff; /* Azzurro chiaro / Viola per hover */
+    transform: scale(1.1); /* Ingrandisce il testo durante l'hover */
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #8a4dff, 0 0 30px #8a4dff, 0 0 40px #8a4dff; /* L'ombra diventa più intensa in viola */
 }
 
-h2 {
-  color: $secondary-color;
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  animation: slideInLeft 0.8s ease-in-out;
+// Distanziamento orizzontale tra i bottoni
+.buttons-container {
+    display: flex;
+    justify-content: center; /* Allinea i bottoni al centro */
+    gap: 30px;  /* Aggiunge spazio tra i bottoni (aumenta il valore per più spazio) */
 }
 
-// Paragrafi
-p {
-  font-size: 1.2rem;
-  line-height: 1.8;
-  margin-bottom: 1.5rem;
+.btn-backend, .btn-frontend {
+    font-weight: 600;
+    font-size: 1.2rem;  // Leggermente più grande
+    padding: 10px 25px;  // Più grande per una migliore resa
+    border-radius: 25px;
+    text-transform: uppercase;
+    background-color: transparent;
+    color: #8a4dff;   /* Colore base per i bottoni */
+    border: 2px solid #8a4dff;
+    transition: all 0.3s ease;
 }
 
-// Listati
-ul {
-  list-style-type: none;
-  padding-left: 0;
+.btn-backend:hover, .btn-frontend:hover {
+    background-color: #8a4dff;  /* Colore viola per l'hover */
+    color: #fff;                /* Colore del testo bianco durante l'hover */
+    border: 2px solid #8a4dff;  /* Bordo viola */
+    transform: scale(1.05);      /* Leggero ingrandimento */
+    box-shadow: 0 0 10px #8a4dff; /* Bagliore viola */
 }
 
-li {
-  font-size: 1.1rem;
-  margin-bottom: 0.8rem;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: $secondary-color;
-    cursor: pointer;
-  }
-}
-
-// Link
-a {
-  color: $primary-color;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease;
-  
-  &:hover {
-    color: $accent-color;
-  }
-}
-
-// Animazioni
-
-// Fade-in animation
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-// Slide-in from the left animation
-@keyframes slideInLeft {
-  0% {
-    transform: translateX(-50px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-// Sezione dei servizi
-ul li strong {
-  color: $primary-color;
-}
-
-// Box shadow per l'effetto hover
-ul li:hover {
-  background-color: $background-color;
-  border-radius: 4px;
-  transform: translateY(-4px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-// Applicazione delle animazioni ai titoli di sezione
-h2,
-h3 {
-  position: relative;
-  display: inline-block;
-}
-
-h2::after,
-h3::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 3px;
-  background-color: $primary-color;
-  bottom: -10px;
-  left: 0;
-  transform: scaleX(0);
-  transform-origin: bottom right;
-  transition: transform 0.4s ease-in-out;
-}
-
-h2:hover::after,
-h3:hover::after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
-}
-
-// Input e bottoni (se ci sono form)
-input, button {
-  padding: 0.8rem 1.2rem;
-  border: 2px solid $primary-color;
-  border-radius: 4px;
-  background-color: $primary-color;
-  color: #fff;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-
-  &:hover {
-    background-color: $secondary-color;
-    transform: translateY(-2px);
-  }
-
-  &:focus {
+.btn-backend:focus, .btn-frontend:focus {
     outline: none;
-    border-color: $secondary-color;
-  }
+    box-shadow: 0 0 5px #8a4dff;
 }
+
