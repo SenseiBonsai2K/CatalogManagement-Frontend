@@ -64,7 +64,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   checkAuthentication(): void {
-    this.isAuthenticated = this.usersService.isLoggedIn();
+    this.isAuthenticated = this.usersService.isAuthenticated();
     if (this.isAuthenticated) {
       const token = this.tokenService.getToken();
       if (token) {

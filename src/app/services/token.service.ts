@@ -26,11 +26,11 @@ export class TokenService {
   }
 
   isTokenExpired(): boolean {
-    const decoded = this.getDecodedToken();
-    if (decoded) {
-      const exp = decoded.exp;
-      const now = Math.floor(Date.now() / 1000);
-      return exp < now;
+    const decodedPayload = this.getDecodedToken();
+    if (decodedPayload) {
+      const exp = decodedPayload.exp;
+      const currentTime = Math.floor(Date.now() / 1000);
+      return exp < currentTime;
     }
     return true;
   }

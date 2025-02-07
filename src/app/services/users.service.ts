@@ -28,13 +28,9 @@ PutUpdateUserUrl = `${environment.baseURL}/api/User/UpdateUser`;
       id: id,
       addUserRequest: addUserRequest
     };
-    
+
     console.log('Update user request:', updateUserRequest);
     return this.httpClient.put(this.PutUpdateUserUrl, updateUserRequest);
-  }
-
-  isLoggedIn() : boolean {
-    return this.tokenService.getToken() !== null;
   }
   
   isAuthenticated(): boolean {
